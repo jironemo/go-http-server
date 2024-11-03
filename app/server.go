@@ -36,8 +36,9 @@ func main() {
 	print(uri)
 	if uri != "/" {
 		conn.Write([]byte("HTTP/1.1 404 Not Found\r\n\r\n"))
+		conn.Close()
 	} else {
 		conn.Write([]byte("HTTP/1.1 200 OK\r\n\r\n"))
+		conn.Close()
 	}
-	conn.Close()
 }

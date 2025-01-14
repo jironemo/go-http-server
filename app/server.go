@@ -15,7 +15,7 @@ func mapper(path string, v net.Conn, data string, headers ...interface{}) error 
 		return fmt.Errorf("no handler for this route")
 	}
 	params_arr := make([]reflect.Value, len(headers))
-	params_arr[0] = reflect.ValueOf(conn)
+	params_arr[0] = reflect.ValueOf(v)
 	params_arr[1] = reflect.ValueOf(data)
 	for i, param := range headers {
 		params_arr[i+2] = reflect.ValueOf(param)
@@ -39,7 +39,7 @@ func main() {
 	if err != nil {
 		fmt.Println("Failed to bind to port 4221")
 	}
-
+	fmt.Println("HTTP Server Started and Listening on port 4221")
 	for {
 		conn, err := l.Accept()
 
